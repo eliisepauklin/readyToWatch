@@ -1,0 +1,28 @@
+<h1>Create</h1>
+
+{{#if errorMessages}}
+    <ul>
+        {{#each errorMessages}}
+            <div class="toast toast-error">
+                <!--<button class="btn btn-clear float-right"></button>-->
+                <p>{{this}}</p>
+            </div>
+        {{/each}}
+    </ul>
+{{/if}}
+
+<form action="" method="post">
+
+    <input type="text" placeholder="TITLE" name="title" value="{{title}}"><br>
+
+    <textarea placeholder="Once upon a time..." name="mainText">{{mainText}}</textarea><br>
+
+    <input type="radio" id="movie" name="mediaType" value="movie">
+    <label for="movie">Movie</label> <br>
+
+    <input type="radio" id="tvshow" name="mediaType" value="tvshow">
+    <label for="tvshow">TV Show</label> <br>
+    
+    <input class="btn btn-submit" type="submit" value="Post!">
+
+</form>

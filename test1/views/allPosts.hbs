@@ -1,0 +1,36 @@
+<h1>All Posts</h1>
+
+{{#if errorMessages}}
+
+    {{#each errorMessages}}
+        <p>{{this}}</p>
+    {{/each}}
+    
+{{else}}
+
+    {{#if posts.length}}
+        <ul>
+            {{#each posts}}
+                <div class="blogPost">
+                    
+                    <a href="/allPosts/{{id}}">
+                        <div class="allPostTitle">
+                            <h4><b>{{title}}</b></h4>
+                        </div>
+                        <div class="mediaType">
+                            <p><i class="text-gray">{{mediaType}}</i></p>
+                        </div>
+                        <div class="allPostsMainText">
+                            <p>{{mainText}}</p>
+                        </div>
+                    </a>
+                </div>
+            {{/each}}
+
+        </ul>
+        
+    {{else}}
+        <p>No posts</p>
+    {{/if}}    
+
+{{/if}}

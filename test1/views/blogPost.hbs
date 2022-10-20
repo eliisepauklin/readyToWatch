@@ -1,0 +1,38 @@
+{{#if errorMessages}}
+
+    {{#each errorMessages}}
+        <p>{{this}}</p>
+    {{/each}}
+
+{{else}}
+
+    {{#if blogPost}}
+
+        <div>
+            <h2>{{blogPost.title}}</h2>
+            <p><i>{{blogPost.mediaType}}</i></p>
+        </div>
+
+        <div>
+            {{blogPost.mainText}}
+        </div>
+        <div>
+            {{blogPost.currentDate}}
+        </div>
+
+        {{#if isLoggedIn}}
+            <div class="btn-group">
+                <div>
+                    <a href="/update-blogPost/{{blogPost.id}}"><button class="btn btn-submit"><i class="icon icon-edit"></i></button></a>
+                </div>
+
+                <form action="/delete-blogPost/{{blogPost.id}}" method="post">
+                    <button class="btn btn-submit" type="submit"> <i class="icon icon-delete"></i> </button>
+                </form>
+            </div>
+        {{/if}}
+    {{else}}
+        <h3>Couldn't find the post</h3>
+    {{/if}}
+
+{{/if}}

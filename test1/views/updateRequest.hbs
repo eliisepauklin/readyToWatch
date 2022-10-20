@@ -1,0 +1,26 @@
+<h1>Update the request</h1>
+
+{{#if errorMessagesForDatabase}}
+    {{#each errorMessagesForDatabase}}
+        <i> {{this}} </i>
+    {{/each}}
+{{else}}
+
+    {{#if errorMessages}}
+
+        <ul>
+            {{#each errorMessages}}
+                <li> <i> {{this}} </i> </li>
+            {{/each}}
+        </ul>
+
+    {{/if}}
+
+    <form action="" method="post">
+
+        <input type="text" placeholder="Movie title" name="titleRequest" value="{{request.titleRequest}}"><br>
+        <input class="btn btn-submit" type="submit" value="Update!">
+
+    </form>
+
+{{/if}}

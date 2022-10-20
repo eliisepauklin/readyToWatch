@@ -1,0 +1,22 @@
+<h1>Log in</h1>
+
+{{#if errorMessages}}
+
+    <ul>
+        {{#each errorMessages}}
+            <div class="toast toast-error">
+                <!--<button class="btn btn-clear float-right"></button>-->
+                <p>{{this}}</p>
+            </div>
+        {{/each}}
+    </ul>
+
+{{/if}}
+
+<form action="" method="post">
+    <ul>
+        <input type="text" placeholder="Username" name="username" value={{enteredUsername}}>
+        <input type="password" placeholder="Password" name="password">
+        <input class="btn btn-submit" type="submit" value="Log in!">
+    </ul>
+</form>

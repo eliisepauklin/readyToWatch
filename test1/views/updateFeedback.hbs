@@ -1,0 +1,27 @@
+<h1>Update review</h1>
+
+{{#if errorMessagesForDatabase}}
+
+    {{#each errorMessagesForDatabase}}
+        <i> {{this}} </i>
+    {{/each}}
+
+{{else}}
+
+    {{#if errorMessages.length}}
+        <ul>
+            {{#each errorMessages}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    {{/if}}
+
+    <form action="" method="post">
+
+        <p>{{feedback.reviewer}}</p><br>
+        <textarea placeholder="What did you think?" rows="3" cols="70" name="feedbackText">{{feedback.feedbackText}}</textarea><br>
+        <input class="btn btn-submit" type="submit" value="Update!">
+
+    </form>
+
+{{/if}}

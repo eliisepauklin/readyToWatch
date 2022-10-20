@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My blog</title>
+    <link rel="stylesheet" href="/spectre.min.css" />
+    <link rel="stylesheet" href="/spectre-exp.min.css" />
+    <link rel="stylesheet" href="/spectre-icons.min.css" />
+    <link rel="stylesheet" href="/layout.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Rubik+Mono+One&display=swap">
+  </head>
+  <body>
+    <header class="navbar">
+
+      <section class="navbar-section">
+        <a href="/allPosts" class="btn btn-link">All Posts</a>
+        <a href="/allRequests" class="btn btn-link">Requests</a>
+        <a href="/feedback" class="btn btn-link">Feedback</a>
+      </section>
+
+      <section class="navbar-center">
+        <a href="/" class="btn btn-link home"><h2>ready to watch</h2></a>
+      </section>
+
+      <section class="navbar-section">
+        <a href="/about" class="btn btn-link">About</a>
+        <a href="/contact" class="btn btn-link">Contact</a>
+
+        {{#unless isLoggedIn}}
+          <a class="btn btn-link" href="/login">Log in</a>
+        {{/unless}}
+
+        {{#if isLoggedIn}}
+          <a href="/create" class="btn btn-link">Create</a>
+          <form action="/logout" method="post">
+            <input class="btn btn-submit" type="submit" value="Log out!" />
+          </form>
+        {{/if}}
+      </section>
+
+    </header>
+
+    
+    {{{body}}}
+
+    <footer>
+      <div class="copyright">
+        <h5>Ⓒ Eliise Pauklin 2022</h5>
+      </div>
+    </footer>
+  </body>
+</html>

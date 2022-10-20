@@ -1,0 +1,21 @@
+<h2>Add a feedback</h2>
+
+{{#if errorMessages}}
+    <ul>
+        {{#each errorMessages}}
+            <div class="toast toast-error">
+                <!--<button class="btn btn-clear float-right"></button>-->
+                <i>{{this}}</i>
+            </div>
+        {{/each}}
+    </ul>
+{{/if}}
+
+
+<form action="" method="post">
+
+    <input placeholder="Name" name="reviewer" value="{{reviewer}}"><br>
+    <textarea placeholder="What did you think?" rows="3" cols="70" name="feedbackText">{{feedbackText}}</textarea><br>
+    <input class="btn btn-submit" type="submit" value="Submit!">
+
+</form>

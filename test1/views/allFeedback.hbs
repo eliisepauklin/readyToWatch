@@ -1,0 +1,51 @@
+<div class="tile">
+    <div class="tile-content">
+        <h1>Feedback</h1>
+    </div>
+        
+    <div class="tile-action">
+
+        <form action="/addFeedback" method="get">
+        <input class="btn btn-submit" type="submit" value="Add a feedback">
+        </form>
+
+    </div>
+</div>
+
+{{#if errorMessages}}
+    <ul>
+        {{#each errorMessages}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+
+{{else}}
+
+    {{#if allFeedback.length}}
+        <ul>
+            {{#each allFeedback}}
+                <div class="tile">
+                    <div class="tile-content">
+                        <h4>{{feedbackText}}</h4>
+                        <p>By {{reviewer}}</p>
+                    </div>
+                    {{#if ../isLoggedIn}}
+                        <div class="tile-action">
+                            <div>
+                                <a href="/updateFeedback/{{id}}"><button class="btn btn-submit"><i class="icon icon-edit"></i></button></a>
+                            </div>
+
+                            <form action="/deleteFeedback/{{id}}" method="post">
+                                <button class="btn btn-submit" type="submit"> <i class="icon icon-delete"></i> </button>
+                            </form>
+                        </div>
+                    {{/if}}
+                </div>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No feedback</p>
+    {{/if}}   
+
+{{/if}}
+
