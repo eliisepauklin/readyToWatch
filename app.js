@@ -273,7 +273,7 @@ app.get('/allPosts/:id', function(request, response){
 
 
 //Updating blog post
-app.get('/update-blogPost/:id', function(request, response){
+app.get('/updateBlogPost/:id', function(request, response){
 
     if(request.session.isLoggedIn){
 
@@ -306,7 +306,7 @@ app.get('/update-blogPost/:id', function(request, response){
     }
 })
 
-app.post('/update-blogPost/:id', function(request, response){
+app.post('/updateBlogPost/:id', function(request, response){
 
     const id = request.params.id
     const newTitle = request.body.title
@@ -368,7 +368,7 @@ app.post('/update-blogPost/:id', function(request, response){
 
 
 //Delete blog page
-app.post('/delete-blogPost/:id', function(request, response){
+app.post('/deleteBlogPost/:id', function(request, response){
 
     if(request.session.isLoggedIn){
 
@@ -557,14 +557,14 @@ app.post('/updateFeedback/:id', function(request, response){
     } else {
 
         const model = {
-            review:{
+            feedback:{
                 reviewer: reviewer,
-                reviewText: newReviewText
+                reviewText: newFeedbackText
             },
             errorMessages
         }
 
-        response.render('updateReview.hbs', model)
+        response.render('updateFeedback.hbs', model)
 
     }
 })
@@ -668,14 +668,22 @@ app.post('/allRequests', function(request, response){
     
         const query = `SELECT * FROM allRequests ORDER BY id`
 
-        db.all(query, function(allRequests){
+        db.all(query, function(error, allRequests){
+            
+            const errorMessagesForDatabase = []
+
+            if(error){
+                console.log(error)
+                errorMessagesForDatabase.push(DB_ERROR_MESSAGE)
+            }
             
             const model = {
+                requests: allRequests,
                 errorMessages,
-                requests: allRequests
+                errorMessagesForDatabase
             }
 
-            response.render('allRequests.hbs', model)
+        response.render("allRequests.hbs", model)     
         })
     }
 })
@@ -843,7 +851,15 @@ app.post('/login', function(request, response){
             }
             response.render('login.hbs', model)
         }
-    } 
+    } else {
+
+        const model = {
+            errorMessages,
+            enteredUsername
+        }
+
+        response.render('login.hbs', model)
+    }
 })
 
 //Log out

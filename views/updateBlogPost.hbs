@@ -11,7 +11,9 @@
     {{#if errorMessages.length}}
         <ul>
             {{#each errorMessages}}
-                <li>{{this}}</li>
+                <div class="toast toast-error">
+                    <p>{{this}}</p>
+                </div>
             {{/each}}
         </ul>
     {{/if}}
