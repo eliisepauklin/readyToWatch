@@ -1,13 +1,17 @@
 <h2>Add a feedback</h2>
 
 {{#if errorMessages}}
+
     <ul>
         {{#each errorMessages}}
+
             <div class="toast toast-error">
                 <i>{{this}}</i>
             </div>
+            
         {{/each}}
     </ul>
+
 {{/if}}
 
 

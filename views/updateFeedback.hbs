@@ -9,13 +9,17 @@
 {{else}}
 
     {{#if errorMessages.length}}
+
         <ul>
             {{#each errorMessages}}
+
                 <div class="toast toast-error">
                     <p>{{this}}</p>
                 </div>
+
             {{/each}}
         </ul>
+        
     {{/if}}
 
     <form action="" method="post">

@@ -10,27 +10,27 @@
 
         <div>
             <h2>{{blogPost.title}}</h2>
-            <p><i>{{blogPost.mediaType}}</i></p>
+            <p><i class="text-gray">{{blogPost.mediaType}}</i></p>
         </div>
 
         <div>
             {{blogPost.mainText}}
         </div>
-        <div>
-            {{blogPost.currentDate}}
-        </div>
 
         {{#if isLoggedIn}}
             <div class="btn-group">
-                <div>
-                    <a href="/updateBlogPost/{{blogPost.id}}"><button class="btn btn-submit"><i class="icon icon-edit"></i></button></a>
-                </div>
+
+                <a href="/updateBlogPost/{{blogPost.id}}">
+                    <button class="btn btn-submit"><i class="icon icon-edit"></i></button>
+                </a>
 
                 <form action="/deleteBlogPost/{{blogPost.id}}" method="post">
-                    <button class="btn btn-submit" type="submit"> <i class="icon icon-delete"></i> </button>
+                    <button class="btn btn-submit" type="submit"> <i class="icon icon-delete"></i></button>
                 </form>
+
             </div>
         {{/if}}
+
     {{else}}
         <h3>Couldn't find the post</h3>
     {{/if}}

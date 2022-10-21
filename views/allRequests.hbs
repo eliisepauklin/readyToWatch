@@ -3,9 +3,7 @@
 {{#if errorMessagesForDatabase}}
 
     {{#each errorMessagesForDatabase}}
-
         <i>{{this}}</i>
-        
     {{/each}}
     
 {{else}}
@@ -17,11 +15,14 @@
 
                 <ul>
                     <div class="tile">
+
                         <div class="tile-content">
                             <li>{{titleRequest}}</li>
                         </div>
+
                         {{#if ../isLoggedIn}}
                             <div class="tile-action btn-group">
+
                                 <div>
                                     <a href="/updateRequest/{{id}}"><button class="btn btn-submit"><i class="icon icon-edit"></i></button></a>
                                 </div>
@@ -29,34 +30,34 @@
                                 <form action="/deleteRequest/{{id}}" method="post">
                                     <button class="btn btn-submit" type="submit"> <i class="icon icon-delete"></i> </button>
                                 </form>
+
                             </div>
                         {{/if}}
+
                     </div>
                 </ul>
+
             {{/each}}
         </ul>
 
     {{else}}
-
     <p>No requests</p>
-
     {{/if}}    
+
 
     <h2>Request a movie or a TV show!</h2>
 
     {{#if errorMessages}}
 
-    <ul>
+        <ul>
+            {{#each errorMessages}}
 
-        {{#each errorMessages}}
+                <div class="toast toast-error">
+                    <p>{{this}}</p>
+                </div>
 
-            <div class="toast toast-error">
-                <p>{{this}}</p>
-            </div>
-
-        {{/each}}
-
-    </ul>
+            {{/each}}
+        </ul>
 
     {{/if}}
 
