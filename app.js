@@ -57,7 +57,6 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('node_modules/spectre.css/dist'))
 app.use(express.static('static'))
 
-
 app.use(expressSession({
     secret: "rtgyhuikolpokhb vggc", //For sessions to be securely implemented session IDs should be random unique long string
     saveUninitialized: false, //if the session is empty, should it be stored - not worth to store
@@ -142,26 +141,31 @@ function getValidationErrorsForLogin(enteredUsername, enteredPassword){
 }
 
 
-
-//GET
+//-----------------------PAGES-------------------------------
 //Start page
 app.get('/', function(request, response){
-    response.render("start.hbs")
+
+    response.render('start.hbs')
+
 })
 
 //About page
 app.get('/about', function(request, response){
-    response.render("about.hbs")
+
+    response.render('about.hbs')
+
 })
 
 //Contact page
 app.get('/contact', function(request, response){
-    response.render("contact.hbs")
+
+    response.render('contact.hbs')
+
 })
 
 
 
-//--------------------BLOG POSTS-----------------------
+//-----------------BLOG POSTS---------------------
 //All Posts page
 app.get('/allPosts', function(request, response){
 
@@ -192,6 +196,7 @@ app.get('/create', function(request, response){
 
     if(request.session.isLoggedIn){
         response.render('create.hbs')
+
     } else {
         response.redirect('/login')
     }
@@ -252,9 +257,10 @@ app.get('/allPosts/:id', function(request, response){
     const id = request.params.id
 
     const query = `SELECT * FROM allPosts WHERE id = ?`
-    values = [id]
+    const values = [id]
 
     db.get(query, values, function(error, blogPost){
+
         const errorMessages = []
 
         if(error){
@@ -280,9 +286,10 @@ app.get('/updateBlogPost/:id', function(request, response){
         const id = request.params.id
 
         const query = `SELECT * FROM allPosts WHERE id = ?`
-        values = [id]
+        const values = [id]
 
         db.get(query, values, function(error, blogPost){
+
             const errorMessagesForDatabase = []
 
             if(error){
@@ -420,6 +427,7 @@ app.get('/feedback', function(request, response){
 
             errorMessages.push(DB_ERROR_MESSAGE)
         }
+
         const model = {
             allFeedback: allFeedback,
             errorMessages
@@ -450,6 +458,7 @@ app.post('/addFeedback', function(request, response){
         const values = [reviewer, feedbackText]
 
         db.run(query, values, function(error){
+
             if(error){
                 console.log(error)
 
@@ -469,7 +478,9 @@ app.post('/addFeedback', function(request, response){
 
             }
         })
+
     } else {
+
         const model = {
             errorMessages,
             reviewer,
@@ -489,9 +500,10 @@ app.get('/updateFeedback/:id', function(request, response){
         const id = request.params.id
 
         const query = `SELECT * FROM allFeedback WHERE id = ?`
-        values = [id]
+        const values = [id]
 
         db.get(query, values, function(error, feedback){
+
             const errorMessagesForDatabase = []
 
             if(error){
@@ -530,7 +542,6 @@ app.post('/updateFeedback/:id', function(request, response){
     if(errorMessages.length == 0){
 
         const query = `UPDATE allFeedback SET feedbackText=? WHERE id = ?`
-
         const values = [newFeedbackText, id]
 
         db.run(query, values, function(error){
@@ -551,9 +562,12 @@ app.post('/updateFeedback/:id', function(request, response){
                 response.render('updateFeedback.hbs', model)
 
             } else{
+
                 response.redirect('/feedback')
+            
             }
         })
+
     } else {
 
         const model = {
@@ -579,6 +593,7 @@ app.post('/deleteFeedback/:id', function(request, response){
 
         const query = `DELETE FROM allFeedback WHERE id = ?`
         const values = [id]
+
         const errorMessages = []
 
         db.run(query, values, function(error){
@@ -622,12 +637,13 @@ app.get('/allRequests', function(request, response){
             console.log(error)
             errorMessagesForDatabase.push(DB_ERROR_MESSAGE)
         }
+
         const model = {
             requests: allRequests,
             errorMessagesForDatabase
         }
 
-        response.render("allRequests.hbs", model)        
+        response.render('allRequests.hbs', model)        
     })
 
 })
@@ -664,6 +680,7 @@ app.post('/allRequests', function(request, response){
 
             }
         })
+
     } else {
     
         const query = `SELECT * FROM allRequests ORDER BY id`
@@ -674,16 +691,17 @@ app.post('/allRequests', function(request, response){
 
             if(error){
                 console.log(error)
+
                 errorMessagesForDatabase.push(DB_ERROR_MESSAGE)
             }
-            
+
             const model = {
                 requests: allRequests,
                 errorMessages,
                 errorMessagesForDatabase
             }
 
-        response.render("allRequests.hbs", model)     
+        response.render('allRequests.hbs', model)     
         })
     }
 })
@@ -694,11 +712,14 @@ app.get('/updateRequest/:id', function(request, response){
     if(request.session.isLoggedIn){
 
         const id = request.params.id
+
         const query = `SELECT * FROM allRequests WHERE id = ?`
         const values = [id]
+
         const errorMessagesForDatabase = []
 
         db.get(query, values, function(error, request){
+
             const errorMessages = []
 
             if(error){
@@ -737,7 +758,6 @@ app.post('/updateRequest/:id', function(request, response){
     if(errorMessages.length == 0){
 
         const query = `UPDATE allRequests SET titleRequest=? WHERE id = ?`
-
         const values = [newTitleRequest, id]
 
         db.run(query, values, function(error){
@@ -760,6 +780,7 @@ app.post('/updateRequest/:id', function(request, response){
                 response.redirect('/allRequests')
             }
         })
+
     } else {
 
         const model = {
@@ -783,6 +804,7 @@ app.post('/deleteRequest/:id', function(request, response){
 
         const query = `DELETE FROM allRequests WHERE id = ?`
         const values = [id]
+
         const errorMessagesForDatabase = []
 
         db.run(query, values, function(error){
@@ -799,9 +821,10 @@ app.post('/deleteRequest/:id', function(request, response){
                 response.render('allRequests.hbs', model)
                 
             } else{
-                response.redirect('/allRequests')
-            }
 
+                response.redirect('/allRequests')
+
+            }
         })
 
     } else {
@@ -817,7 +840,7 @@ app.post('/deleteRequest/:id', function(request, response){
 //Login page
 app.get('/login', function(request, response){
 
-    response.render("login.hbs")
+    response.render('login.hbs')
 
 })
 
@@ -830,11 +853,13 @@ app.post('/login', function(request, response){
     const passwordIsCorrect = bcrypt.compareSync(enteredPassword, ADMIN_PASSWORD)
 
     if (errorMessages.length == 0){
+
         if (enteredUsername == ADMIN_USERNAME && passwordIsCorrect) {
 
             request.session.isLoggedIn = true
 
             response.redirect('/')
+
         } else {
 
             if(enteredUsername != ADMIN_USERNAME) {
@@ -849,8 +874,10 @@ app.post('/login', function(request, response){
                 errorMessages,
                 enteredUsername
             }
+
             response.render('login.hbs', model)
         }
+        
     } else {
 
         const model = {
